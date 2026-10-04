@@ -1,5 +1,6 @@
 package DPLec2;
 
+//Based on query , get the subarray sum in O(n) from 0 to q
 public class OptimiseLec2 {
     public static void main(String[] args) {
 
