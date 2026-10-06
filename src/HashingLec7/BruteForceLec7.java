@@ -19,6 +19,7 @@ public class BruteForceLec7 {
             }
         }
         System.out.println("Total subarrays: " + count);
+
         // For this array, the output will be 3: [1, 0, 1, 1], [0, 1, 2], and [1, 2]
     }
 }
