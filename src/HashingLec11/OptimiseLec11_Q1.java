@@ -3,7 +3,8 @@ package HashingLec11;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OptimiseLec11_2 {
+//Find Frequency Of Element In The Array
+public class OptimiseLec11_Q1 {
     public static void main(String[] args) {
         // --- Test Example 1 ---
         int[] arr1 = {1, 1, 1, 1, 1};

@@ -1,6 +1,7 @@
 package HashingLec11;
 
-public class BruteForceLec11 {
+//Find Frequency Of Element In The Array
+public class BruteForceLec11_Q1 {
     public static void main(String[] args) {
         int[] arr1 = {1, 1, 1, 1, 1};
         int x1 = 1;
