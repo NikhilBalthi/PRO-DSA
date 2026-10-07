@@ -3,6 +3,7 @@ package HashingLec12;
 import java.util.HashMap;
 import java.util.Map;
 
+//Max distance between same elements
 public class OptimiseLec12_Q1 {
 
     public static int maxDistance(int[] arr) {
@@ -25,6 +26,6 @@ public class OptimiseLec12_Q1 {
     public static void main(String[] args) {
         int[] arr = {3, 2, 1, 2, 1, 4, 5, 8, 6, 7, 4, 2};
         // '2' appears at index 1 and index 11 -> Distance = 11 - 1 = 10
-        System.out.println("Optimized Output: " + maxDistance(arr)); // Output: 10
+        System.out.println("Output: " + maxDistance(arr)); // Output: 10
     }
 }
