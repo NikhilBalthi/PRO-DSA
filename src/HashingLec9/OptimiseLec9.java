@@ -1,47 +1,112 @@
 package HashingLec9;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class OptimiseLec9 {
     public static void main(String[] args) {
-        Map<Integer,Integer> map = new HashMap<>();
-        int[] nums = new int[]{1,2,-1,2,1};
+        int[] nums = new int[]{1, 2, -1, 2, 1};
         int k = 3;
-        System.out.println("no of subrrays with largest size "+countLargestSubarrayWithSumK(nums,k));
-        System.out.println("no of subarrays with smallest size "+countSmallestSubarrayWithSumK(nums,k));
+
+        System.out.println("--- LARGEST SUBARRAYS ---");
+        countLargestSubarrayWithSumK(nums, k);
+
+        System.out.println("\n--- SMALLEST SUBARRAYS ---");
+        countSmallestSubarrayWithSumK(nums, k);
     }
 
-    public static int countLargestSubarrayWithSumK(int[] nums,int k){
+    // 1. Find and print subarrays with MAXIMUM length that sum to k
+    public static void countLargestSubarrayWithSumK(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>(); // [PrefixSum -> First Seen Index]
+        map.put(0, -1);
 
-
-        return 0;
-    }
-    public static int countSmallestSubarrayWithSumK(int[] nums,int k){
-        HashMap<Integer,Integer> map = new HashMap<>();
-        map.put(0,-1);
-        int n = nums.length;
         int prefixSum = 0;
-        int minLength = Integer.MIN_VALUE;
-        for (int i = 0; i < n; i++) {
-            prefixSum+=nums[i];
-            if(map.containsKey(prefixSum-k)) {
-                int length = i - map.get(prefixSum - k);
-                minLength = Math.min(minLength,length);
+        int maxLength = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            prefixSum += nums[i];
+            int target = prefixSum - k;
+
+            if (map.containsKey(target)) {
+                int length = i - map.get(target);
+                if (length > maxLength) {
+                    maxLength = length; // Track the largest size found
+                }
             }
-            map.put(prefixSum,i);
+            if (!map.containsKey(prefixSum)) {
+                map.put(prefixSum, i);
+            }
         }
-        if(minLength == Integer.MIN_VALUE) return 0;
 
+        // Print matches of maxLength
         int count = 0;
+        prefixSum = 0;
         map.clear();
-        map.put(0,-1);
-        for (int i = 0; i < n; i++) {
-            prefixSum+=nums[i];
+        map.put(0, -1);
 
+        for (int i = 0; i < nums.length; i++) {
+            prefixSum += nums[i];
+            int target = prefixSum - k;
+
+            if (map.containsKey(target)) {
+                int startIdx = map.get(target) + 1;
+                if (i - map.get(target) == maxLength) {
+                    count++;
+                    // Print the matching subarray
+                    int[] subArray = Arrays.copyOfRange(nums, startIdx, i + 1);
+                    System.out.println("Match " + count + ": " + Arrays.toString(subArray));
+                }
+            }
+            if (!map.containsKey(prefixSum)) {
+                map.put(prefixSum, i);
+            }
         }
-        return 0;
-        //incomplete code
+        System.out.println("Total count: " + count);
+    }
+
+    // 2. Find and print subarrays with MINIMUM length that sum to k
+    public static void countSmallestSubarrayWithSumK(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>(); // [PrefixSum -> Most Recent Index]
+        map.put(0, -1);
+
+        int prefixSum = 0;
+        int minLength = Integer.MAX_VALUE;
+
+        for (int i = 0; i < nums.length; i++) {
+            prefixSum += nums[i];
+            int target = prefixSum - k;
+
+            if (map.containsKey(target)) {
+                int length = i - map.get(target);
+                if (length < minLength) {
+                    minLength = length; // Track the smallest size found
+                }
+            }
+            map.put(prefixSum, i);
+        }
+
+        // Print matches of minLength
+        int count = 0;
+        prefixSum = 0;
+        map.clear();
+        map.put(0, -1);
+
+        for (int i = 0; i < nums.length; i++) {
+            prefixSum += nums[i];
+            int target = prefixSum - k;
+
+            if (map.containsKey(target)) {
+                int startIdx = map.get(target) + 1;
+                if (i - map.get(target) == minLength) {
+                    count++;
+                    // Print the matching subarray
+                    int[] subArray = Arrays.copyOfRange(nums, startIdx, i + 1);
+                    System.out.println("Match " + count + ": " + Arrays.toString(subArray));
+                }
+            }
+            map.put(prefixSum, i);
+        }
+        System.out.println("Total count: " + count);
     }
 }

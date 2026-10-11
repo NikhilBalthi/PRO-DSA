@@ -2,6 +2,7 @@ package HashingLec11;
 
 import java.util.Scanner;
 
+//Range Sum from given index left, right
 public class OptimiseLec11_Q3 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

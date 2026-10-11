@@ -2,6 +2,7 @@ package HashingLec11;
 
 import java.util.Arrays;
 
+// Two Sum LeetCode Problem
 public class BruteForceLec11_Q2 {
 
     // Method to find indices using Brute Force (Nested Loops)

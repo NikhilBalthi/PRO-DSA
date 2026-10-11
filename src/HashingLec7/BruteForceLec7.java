@@ -1,25 +1,25 @@
 package HashingLec7;
 
-// Count no of subarrays having sum = k
 public class BruteForceLec7 {
     public static void main(String[] args) {
         int[] arr = new int[]{1, 0, 1, 2, 10, 8};
-        int k = 3, count = 0;
+        int k = 3;
+        int count = 0;
 
-        // j represents the ending index of our subarray
-        for (int j = 0; j < arr.length; j++) {
+        // Outer loop 'i' sets the START of the subarray
+        for (int i = 0; i < arr.length; i++) {
             int current_sum = 0;
 
-            // i moves backwards from j to the start of the array (index 0)
-            for (int i = j; i >= 0; i--) {
-                current_sum += arr[i];
+            // Inner loop 'j' expands the END of the subarray forward
+            for (int j = i; j < arr.length; j++) {
+                current_sum += arr[j]; // Keep adding elements as the window grows
+
+                // Check if the current window matches our target k
                 if (current_sum == k) {
                     count++;
                 }
             }
         }
-        System.out.println("Total subarrays: " + count);
-
-        // For this array, the output will be 3: [1, 0, 1, 1], [0, 1, 2], and [1, 2]
+        System.out.println("Total subarrays: " + count); // Output: 2
     }
 }
