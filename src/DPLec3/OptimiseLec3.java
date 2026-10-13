@@ -25,10 +25,10 @@ public class OptimiseLec3 {
             int include = a[i]+dp[i-2];
 
             // Choice 2: Exclude current element, carry forward max sum from 1 step back 'dp[i-1]'
-            int exlude = dp[i-1];
+            int exclude = dp[i-1];
 
             // Take the best of both choices
-            dp[i] = Math.max(include,exlude);
+            dp[i] = Math.max(include,exclude);
         }
         // The final element contains the answer for the whole array
         return dp[n-1];
